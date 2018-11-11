@@ -5,20 +5,6 @@ from sqlalchemy.orm import sessionmaker, relationship
 Base = declarative_base()
 
 
-# write the Player, City, Sport and Team tables below
-class Player(Base):
-	__tablename__ = "players"
-
-	id = Column(Integer, primary_key=True)
-	name = Column(Text)
-	age = Column(Integer)
-	number = Column(Integer)
-	height = Column(Text)
-	weight = Column(Integer)
-	birthday = Column(String)
-	team_id = Column(Integer, ForeignKey('teams.id'))
-	team = relationship('Team', back_populates='players')
-
 class Team(Base):
 	__tablename__ = "teams"
 
@@ -32,8 +18,23 @@ class Team(Base):
 	sport_id = Column(Integer, ForeignKey('sports.id'))
 	sport = relationship('Sport', back_populates='teams')
 
-	players = relationship(Player, back_populates='team')
+	players = relationship('Player', back_populates='team')
 
+
+
+# write the Player, City, Sport and Team tables below
+class Player(Base):
+	__tablename__ = "players"
+
+	id = Column(Integer, primary_key=True)
+	name = Column(Text)
+	age = Column(Integer)
+	number = Column(Integer)
+	height = Column(Text)
+	weight = Column(Integer)
+	birthday = Column(String)
+	team_id = Column(Integer, ForeignKey('teams.id'))
+	team = relationship('Team', back_populates='players')
 
 
 
